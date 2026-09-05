@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from simulation.generator import (
@@ -12,6 +13,14 @@ from algorithms.response_engine import handle_emergency
 app = FastAPI(
     title="Emergency Response Intelligence System",
     version="0.3.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
